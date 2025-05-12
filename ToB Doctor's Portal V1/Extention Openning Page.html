@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fountain - Cover Page</title>
+  <style>
+    /* Full-screen black background */
+    body {
+      margin: 0;
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .cover-container {
+      text-align: center;
+    }
+    /* Fountain text with typewriter animation using a lighter, elegant cursive font */
+    .fountain {
+      font-family: "Segoe Script", "Apple Chancery", "Lucida Handwriting", cursive;
+      font-size: 64px;
+      font-weight: 300; /* lighter weight for a refined look */
+      border-right: 2px solid #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      margin: 0 auto;
+      animation: typing 3s steps(10, end) forwards, blink-caret 0.75s step-end infinite;
+    }
+    /* Motivating subtitle */
+    .subtitle {
+      font-family: "Segoe Script", "Apple Chancery", "Lucida Handwriting", cursive;
+      font-size: 20px;
+      margin-top: 20px;
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+      animation-delay: 3s;
+    }
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    @keyframes blink-caret {
+      from, to { border-color: transparent; }
+      50% { border-color: #fff; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="cover-container">
+    <div class="fountain">Fountain</div>
+    <div class="subtitle">Empowering Health, Inspiring Hope</div>
+  </div>
+</body>
+</html>
