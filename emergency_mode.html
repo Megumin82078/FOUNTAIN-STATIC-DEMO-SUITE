@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fountain - Emergency Access Mode</title>
+  <!-- Importing a fancy font for the logo/title -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&display=swap" rel="stylesheet">
+  <style>
+    /* Base Styles */
+    body {
+      margin: 0;
+      font-family: 'SF Pro Text', sans-serif;
+      background: linear-gradient(270deg, #1E1E1E, #2C2C2C, #1E1E1E);
+      background-size: 600% 600%;
+      animation: gradientShift 10s ease infinite;
+      color: #FFFFFF;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .container {
+      width: 600px;
+      padding: 32px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .header h1 {
+      font-size: 32px;
+      margin: 0;
+      font-family: 'Cinzel Decorative', serif;
+      color: #FFFFFF;
+      letter-spacing: 3px;
+    }
+    .header h2 {
+      font-size: 20px;
+      margin-top: 8px;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 20px;
+      box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    .card h3 {
+      margin-top: 0;
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+    .info-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .info-list li {
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+    .highlight {
+      color: red;
+      font-weight: bold;
+    }
+    .btn {
+      width: 100%;
+      background: linear-gradient(145deg, #2a2a2a, #1c1c1c);
+      border: none;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 16px;
+      color: #FFFFFF;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 4px 4px 8px #141414, -4px -4px 8px #2e2e2e;
+      margin-top: 16px;
+    }
+    .btn:active {
+      transform: scale(0.98);
+      box-shadow: inset 4px 4px 8px #141414, inset -4px -4px 8px #2e2e2e;
+    }
+    .timer {
+      font-size: 18px;
+      text-align: center;
+      margin-top: 12px;
+    }
+    .notification {
+      font-size: 14px;
+      margin-top: 12px;
+      text-align: center;
+      color: #CCCCCC;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Fountain</h1>
+      <h2>Emergency Access Mode</h2>
+    </div>
+    
+    <!-- Critical Data Card -->
+    <div class="card">
+      <h3>Critical Data</h3>
+      <ul class="info-list">
+        <li><strong>Allergies:</strong> Penicillin, Nuts</li>
+        <li><strong>Chronic Conditions:</strong> Hypertension, Type 2 Diabetes</li>
+        <li><strong>Current Medications:</strong> Metformin 500 mg BID, Lisinopril 10 mg daily</li>
+        <li><strong>Recent Vital Signs:</strong> BP 150/90, HR 102 bpm</li>
+      </ul>
+    </div>
+    
+    <!-- Emergency Mode Details Card -->
+    <div class="card">
+      <h3>Access Details</h3>
+      <p>This mode grants <strong>limited access</strong> to essential data only. Full records remain restricted.</p>
+      <p class="notification">Patient has been notified of this emergency access.</p>
+      <div class="timer">
+        Time Remaining: <span class="highlight">60:00</span>
+      </div>
+    </div>
+    
+    <!-- Exit Button -->
+    <button class="btn">Exit Emergency Mode</button>
+  </div>
+</body>
+</html>

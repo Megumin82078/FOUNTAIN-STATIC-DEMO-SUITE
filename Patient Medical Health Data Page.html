@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fountain - Personal Health Data Record</title>
+  <!-- Importing a fancy font for the logo/title -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative&display=swap" rel="stylesheet">
+  <style>
+    /* Base Styles */
+    body {
+      margin: 0;
+      font-family: 'SF Pro Text', sans-serif;
+      background: linear-gradient(270deg, #1E1E1E, #2C2C2C, #1E1E1E);
+      background-size: 600% 600%;
+      animation: gradientShift 10s ease infinite;
+      color: #FFFFFF;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      width: 800px;
+      padding: 32px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    .header h1 {
+      font-size: 32px;
+      margin: 0;
+      font-family: 'Cinzel Decorative', serif;
+      color: #FFFFFF;
+      letter-spacing: 3px;
+    }
+    .header h2 {
+      font-size: 20px;
+      margin-top: 8px;
+    }
+
+    .flex-container {
+      display: flex;
+      gap: 20px;
+    }
+    .left-panel {
+      width: 40%; /* approx 2/5 of container width */
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .right-panel {
+      width: 60%; /* approx 3/5 of container width */
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    .card h3 {
+      margin-top: 0;
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background: rgba(255, 255, 255, 0.1);
+    }
+    tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    /* Style for the view button inside table */
+    .small-btn {
+      background: linear-gradient(145deg, #2a2a2a, #1c1c1c);
+      border: none;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 12px;
+      color: #FFFFFF;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 2px 2px 4px #141414, -2px -2px 4px #2e2e2e;
+    }
+    .small-btn:active {
+      transform: scale(0.98);
+      box-shadow: inset 2px 2px 4px #141414, inset -2px -2px 4px #2e2e2e;
+    }
+
+    .summary {
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .summary p {
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-weight: bold;
+      margin-bottom: 6px;
+      text-decoration: underline;
+    }
+    .highlight {
+      color: red;
+      font-weight: bold;
+    }
+    ul {
+      margin: 0 0 12px 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Fountain</h1>
+      <h2>Personal Health Data Record</h2>
+    </div>
+
+    <div class="flex-container">
+      <!-- Left Column -->
+      <div class="left-panel">
+        
+        <!-- Medical History Card -->
+        <div class="card">
+          <h3>Medical History</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Details</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Sorted in descending order by date -->
+              <tr>
+                <td>2025-02-10</td>
+                <td>Lab Result</td>
+                <td>Vitamin D: 28 ng/mL (<30 Insufficient)</td>
+                <td><button class="small-btn">View</button></td>
+              </tr>
+              <tr>
+                <td>2025-02-01</td>
+                <td>Diagnosis</td>
+                <td>Mild Anemia</td>
+                <td><button class="small-btn">View</button></td>
+              </tr>
+              <tr>
+                <td>2025-01-20</td>
+                <td>Lab Result</td>
+                <td>Cholesterol 190 mg/dL (<200 Normal)</td>
+                <td><button class="small-btn">View</button></td>
+              </tr>
+              <tr>
+                <td>2025-01-15</td>
+                <td>Diagnosis</td>
+                <td>Stage 1 Hypertension</td>
+                <td><button class="small-btn">View</button></td>
+              </tr>
+              <tr>
+                <td>2024-12-30</td>
+                <td>Lab Result</td>
+                <td>Blood Sugar 95 mg/dL (70-100 Normal)</td>
+                <td><button class="small-btn">View</button></td>
+              </tr>
+              <tr>
+                <td>2024-12-10</td>
+                <td>Diagnosis</td>
+                <td>Seasonal Allergies</td>
+                <td><button class="small-btn">View</button></td>
+              </tr>
+              <tr>
+                <td>2024-11-20</td>
+                <td>Lab Result</td>
+                <td>HbA1c: 6.5% (Slightly Elevated)</td>
+                <td><button class="small-btn">View</button></td>
+              </tr>
+              <tr>
+                <td>2024-11-05</td>
+                <td>Diagnosis</td>
+                <td>Obesity, BMI 32</td>
+                <td><button class="small-btn">View</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <!-- Basic Information Card -->
+        <div class="card">
+          <h3>Basic Information</h3>
+          <p><strong>Age:</strong> 45</p>
+          <p><strong>Gender:</strong> Male</p>
+          <p><strong>Weight:</strong> 80 kg</p>
+          <p><strong>Height:</strong> 175 cm</p>
+          <p><strong>BMI:</strong> 26.1 (Overweight)</p>
+          <p><strong>Blood Type:</strong> O+</p>
+          <p><strong>Smoking Status:</strong> Non-smoker</p>
+          <p><strong>Alcohol Use:</strong> Occasional</p>
+        </div>
+      </div>
+      
+      <!-- Right Column: Patient Summary and Insight (Previous Detailed Version) -->
+      <div class="right-panel">
+        <div class="card">
+          <h3>Patient Summary and Insight</h3>
+          <div class="summary">
+            <p class="section-title">Chief Complaint:</p>
+            <p>Patient presents with <span class="highlight">persistent exertional chest pain</span> and shortness of breath over the past two weeks, accompanied by occasional palpitations.</p>
+            
+            <p class="section-title">Medical Background:</p>
+            <p>
+              The patient has a 10-year history of Type 2 Diabetes with suboptimal glycemic control (recent HbA1c ~7.2%), chronic Hypertension, and Dyslipidemia. A <span class="highlight">significant family history</span> of premature coronary artery disease is noted.
+            </p>
+            
+            <p class="section-title">Diagnostics:</p>
+            <p>Recent investigations include:</p>
+            <ul>
+              <li>LDL Cholesterol: 135 mg/dL</li>
+              <li>HDL Cholesterol: 45 mg/dL</li>
+              <li>Triglycerides: 180 mg/dL</li>
+              <li>HbA1c: 6.8%</li>
+              <li>ECG: Minor ST depressions observed; further evaluation recommended</li>
+            </ul>
+            
+            <p class="section-title">Medications:</p>
+            <p>Current pharmacological management comprises:</p>
+            <ul>
+              <li>Metformin 500 mg BID</li>
+              <li>Lisinopril 10 mg daily</li>
+              <li>Atorvastatin 20 mg nightly</li>
+            </ul>
+            
+            <p class="section-title">Allergies:</p>
+            <p>Patient reports seasonal allergic rhinitis; no drug allergies.</p>
+            
+            <p class="section-title">Recommendations &amp; Risk Assessment:</p>
+            <p>
+              Based on cumulative risk factors, the patient is assessed to have a <span class="highlight">high cardiovascular risk</span>. It is <span class="highlight">crucial</span> to:
+            </p>
+            <ul>
+              <li>Initiate an urgent cardiology evaluation to rule out ischemic heart disease.</li>
+              <li>Optimize lipid management and intensify glycemic control.</li>
+              <li>Consider stress testing and echocardiography if symptoms persist.</li>
+            </ul>
+            
+            <!-- "Follow-Up & Monitoring" Removed -->
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</body>
+</html>
