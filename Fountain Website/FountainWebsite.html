@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Fountain - Revolutionizing Healthcare Data</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      background: #000;
+      color: #fff;
+      font-family: 'Lora', serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+    h1, h2, h3, .logo {
+      font-family: 'Playfair Display', serif;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    /* Wave Container */
+    .wave-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 50vh;
+      z-index: -999;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .wave-container svg {
+      position: absolute;
+      width: 200%;
+      height: 100%;
+      min-width: 1440px;
+      fill: #222;
+      opacity: 0.3;
+      animation: waveScroll 12s linear infinite;
+    }
+    @keyframes waveScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .wave2 {
+      fill: #333;
+      opacity: 0.25;
+      animation-duration: 16s;
+      animation-delay: 2s;
+    }
+
+    /* Glow Orbs */
+    .glow-orbs {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -998;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.3), transparent 60%);
+      filter: blur(10px);
+      animation: flicker 5s ease-in-out infinite alternate;
+      opacity: 0.4;
+    }
+    @keyframes flicker {
+      0%, 100% {
+        transform: scale(0.9);
+        opacity: 0.3;
+      }
+      50% {
+        transform: scale(1.15);
+        opacity: 0.7;
+      }
+    }
+    .orb1 {
+      top: 20%;
+      left: 30%;
+      width: 120px;
+      height: 120px;
+      animation-delay: 0s;
+    }
+    .orb2 {
+      top: 60%;
+      left: 80%;
+      width: 180px;
+      height: 180px;
+      animation-delay: 2s;
+    }
+    .orb3 {
+      top: 45%;
+      left: 10%;
+      width: 100px;
+      height: 100px;
+      animation-delay: 4s;
+    }
+    .orb4 {
+      top: 70%;
+      left: 50%;
+      width: 150px;
+      height: 150px;
+      animation-delay: 1s;
+    }
+
+    /* Header and Navigation */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.7);
+      padding: 1rem 0;
+      z-index: 1000;
+      box-shadow: 0 0 10px rgba(255,255,255,0.03);
+      backdrop-filter: saturate(150%) blur(6px);
+      -webkit-backdrop-filter: saturate(150%) blur(6px);
+    }
+    nav {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .logo {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      color: #fff;
+      font-weight: 700;
+    }
+    /* Navigation Menu – Always Horizontal */
+    nav ul {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    nav ul li a {
+      font-size: 1rem;
+      color: #ccc;
+      transition: color 0.3s;
+    }
+    nav ul li a:hover {
+      color: #fff;
+    }
+
+    /* Hero Section */
+    #hero {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      text-align: center;
+    }
+    .hero-content {
+      max-width: 90%;
+      padding: 1rem;
+      animation: fadeIn 1.2s ease-out;
+    }
+    .hero-content h1 {
+      font-size: 6rem;
+      margin-bottom: 1rem;
+      color: #fff;
+      letter-spacing: 1px;
+      text-shadow:
+        0 15px 30px rgba(255,255,255,0.6),
+        0 0 8px rgba(255,255,255,0.2);
+    }
+    .hero-content p {
+      font-size: 1.3rem;
+      color: #ccc;
+      margin-bottom: 2rem;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .scroll-indicator {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2rem;
+      color: #888;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translate(-50%, 0); }
+      50%      { transform: translate(-50%, -10px); }
+    }
+
+    /* Section Styles */
+    section {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .section-title {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      color: #fff;
+      position: relative;
+      display: inline-block;
+      letter-spacing: 0.5px;
+      text-shadow: 0 4px 8px rgba(255,255,255,0.4);
+    }
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 50px;
+      height: 2px;
+      background: #fff;
+      margin: 0.75rem auto 0;
+    }
+    section p {
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 1rem auto;
+      color: #ccc;
+      line-height: 1.7;
+    }
+    .btn {
+      display: inline-block;
+      background: #fff;
+      color: #000;
+      padding: 0.75rem 1.5rem;
+      margin: 0.5rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 4px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    /* Learn More Section */
+    #learn-more .content-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    /* Team Section */
+    .team-group {
+      margin-bottom: 4rem;
+    }
+    .team-group h3 {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #ddd;
+      text-shadow: 0 4px 8px rgba(255,255,255,0.3);
+    }
+    .team-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    .team-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 1.5rem;
+      border-radius: 8px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .team-card h4 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: #fff;
+      text-shadow: 0 4px 8px rgba(255,255,255,0.3);
+    }
+    .team-card p {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      color: #ccc;
+    }
+    .team-card:hover { 
+      transform: scale(1.03);
+      box-shadow: 0 12px 24px rgba(255,255,255,0.15);
+    }
+
+    /* Video Section */
+    .video-container {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(255,255,255,0.05);
+      margin: 2rem auto;
+      max-width: 800px;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Demo Section */
+    #demo {
+      padding: 6rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    #demo .section-title {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      color: #fff;
+      text-shadow: 0 4px 8px rgba(255,255,255,0.4);
+    }
+    #demo p {
+      font-size: 1.1rem;
+      color: #ccc;
+      max-width: 800px;
+      margin: 1rem auto;
+      line-height: 1.7;
+    }
+    .demo-button {
+      display: inline-block;
+      background: #fff;
+      color: #000;
+      padding: 0.75rem 1.5rem;
+      margin: 1rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 4px;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+    .demo-button:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    /* Footer */
+    footer {
+      background: #111;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #bbb;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    footer .contact-info {
+      margin-top: 0.5rem;
+      color: #888;
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 3rem;
+      }
+      .hero-content p {
+        font-size: 1rem;
+      }
+      /* The navigation menu remains horizontal due to its default styles.
+         Optionally, you can adjust the gap on smaller screens: */
+      nav ul {
+        gap: 1rem;
+      }
+      .team-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wave-container">
+    <svg class="wave wave1" viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <path d="M0,320L48,293.3C96,267,192,213,288,208C384,203,480,245,576,229.3C672,213,768,139,864,106.7C960,75,1056,85,1152,101.3C1248,117,1344,139,1392,149.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+    </svg>
+    <svg class="wave wave2" viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <path d="M0,288L48,250.7C96,213,192,139,288,101.3C384,64,480,64,576,96C672,128,768,192,864,197.3C960,203,1056,149,1152,128C1248,107,1344,117,1392,122.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+    </svg>
+  </div>
+
+  <div class="glow-orbs">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+    <div class="orb orb4"></div>
+  </div>
+
+  <header>
+    <nav>
+      <div class="logo">Fountain</div>
+      <ul>
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#problem">Problem</a></li>
+        <li><a href="#mission">Our Mission</a></li>
+        <li><a href="#learn-more">Learn More</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#video">Video</a></li>
+        <li><a href="#demo">Request a Demo</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <section id="hero">
+    <div class="hero-content">
+      <h1>Fountain</h1>
+      <p>Revolutionizing Healthcare Data</p>
+    </div>
+    <div class="scroll-indicator">&#x25BC;</div>
+  </section>
+  
+  <section id="problem">
+    <h2 class="section-title">What is the Problem?</h2>
+    <p>Transferring medical records in Canada can take up to 30 business days and cost at least $30 per transfer. Only 29% of physicians report sharing health data outside their practice, yet they needed external information for about half (52%) of their patients in the past 12 months. Because of limited connectivity between clinics, hospitals, and different jurisdictions—and insufficient data privacy legislation—patients visiting multiple specialists often face duplicate tests and uninformed treatments due to poor data sharing. These inefficiencies delay care, drive up overall costs, and leave patients, providers and governments frustrated.</p>
+  </section>
+  
+  <section id="mission">
+    <h2 class="section-title">Our Mission</h2>
+    <p>At Fountain, we believe every patient deserves full control over their health data. By integrating advanced artificial intelligence that provides intensive support directly to doctors with robust encryption, we break down the barriers between clinics, hospitals, and jurisdictions. Our solution ensures that vital information is not only securely accessible and efficiently shared but also empowers healthcare professionals with real-time insights for better decision-making.</p>
+    <p>We eliminate redundant processes, foster transparent collaboration, and unify the healthcare ecosystem so that patients receive timely, informed care while doctors benefit from AI-driven decision support. Our ultimate goal is to build a trust-driven network where data is used and shared responsibly and effectively to transform healthcare for everyone.</p>
+    <blockquote style="font-style: italic; margin: 2rem auto; max-width: 800px; text-align: center;">
+      “As referenced in your proposal [Fountain Proposal], data fragmentation and lack of standardization hinders the secure access, use and exchange of health information across digitally connected health systems in Canada.” – Elizabeth Toller, Director General, Health Care Strategies, Health Canada.
+    </blockquote>
+  </section>
+  
+  <section id="learn-more">
+    <div class="content-wrapper">
+      <h2 class="section-title">Learn More</h2>
+      <p>Explore and understand our innovative approach.</p>
+      <a href="https://drive.google.com/file/d/1KkVcO2svGtNZLNbGNaoN9WWY2vgJXE_l/view?usp=drive_link" class="btn" target="_blank">Fountain Proposal</a>
+      <a href="https://drive.google.com/file/d/1qLRZyiHyud2JtZN_qD5RGSnpPtvycpGW/view?usp=drive_link" class="btn" target="_blank">Fountain Technical Plan</a>
+      <a href="https://drive.google.com/file/d/1Cm1SmlCYdfNYaiBrq62HGyEe65dqHHGT/view?usp=drive_link" class="btn" target="_blank">Fountain Pitch Deck</a>
+      <a href="https://drive.google.com/file/d/1D4Y2VcBoR_nokdtulXuPv0T1-4gzhH14/view?usp=sharing" class="btn" target="_blank">Fountain Market &amp; Feasibility Analysis</a>
+    </div>
+  </section>
+
+  <section id="team">
+    <h2 class="section-title">Our Team</h2>
+    <div class="team-group">
+      <h3>Core Personnel</h3>
+      <div class="team-container">
+        <div class="team-card">
+          <h4>Megumin Wang</h4>
+          <p><strong>Founder &amp; Visionary Lead</strong></p>
+          <p>Originating the bottom-up model for healthcare data management, inspired from discussions with Professor Muthucumaru Maheswaran of McGill University. With a background in Math and CS from the University of Waterloo, the focus remains on combining innovation and practical execution. Handling Fountain’s overall direction—from building our product to planning the future.</p>
+        </div>
+        <div class="team-card">
+          <h4>Phoenix (Kunyu) Li</h4>
+          <p><strong>Co-Founder &amp; Operational Lead</strong></p>
+          <p>With a background from the University of Toronto, extensive experience in clinical operations, patient engagement, and healthcare research. Experienced in EMR systems, improving patient workflows, and collaborating with interdisciplinary medical teams. Founded a non-profit organization focused on chronic wound care, with strong problem-solving and leadership in healthcare settings.</p>
+        </div>
+      </div>
+    </div>
+    <div class="team-group">
+      <h3>Technical Advisor</h3>
+      <div class="team-container">
+        <div class="team-card">
+          <h4>Florian Kerschbaum</h4>
+          <p><strong>Professor</strong></p>
+          <p>Professor at the University of Waterloo and NSERC/RBC Chair in data security. Former chief research expert at SAP and software architect at Arxan Technologies, with a Ph.D. from the Karlsruhe Institute of Technology. Award-winning expert in cryptographic security and privacy, providing key technical guidance for Fountain’s technical implementation.</p>
+        </div>
+        <div class="team-card">
+          <h4>Raouf Boutaba</h4>
+          <p><strong>Director &amp; Professor</strong></p>
+          <p>Director of the David R. Cheriton School of Computer Science at the University of Waterloo and a Fellow of multiple prestigious organizations, including FRSC and FIEEE. Expertise in network management, cloud computing, software networks, and cybersecurity. Provides strategic, multi-faceted technical guidance to Fountain’s development and implementation.</p>
+        </div>
+      </div>
+    </div>
+    <div class="team-group">
+      <h3>Legal Partner</h3>
+      <div class="team-container">
+        <div class="team-card">
+          <h4>Queen's Business Law Clinic</h4>
+          <p>Offering expertise in business and intellectual property law, assisting start-ups, not-for-profits, and charities. Provides key guidance to Fountain on privacy law, data protection, and sensitive legal obligations.</p>
+        </div>
+        <div class="team-card">
+          <h4>Uvic Business Law Clinic</h4>
+          <p>A hub for innovative legal solutions, offering specialized support to start-ups and organizations. Provides Fountain with essential guidance on navigating complex legal responsibilities.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="video">
+    <h2 class="section-title">3 Min Introduction</h2>
+    <p>Let us introduce ourself and Our demo</p>
+    <div class="video-container">
+      <iframe src="https://www.youtube.com/embed/nLbLErBAb8E?si=hKAQYWY2mxEYNwxn" allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <section id="demo">
+    <h2 class="section-title">Request a Demo</h2>
+    <p>See <strong>Fountain</strong> in action! Contact us to schedule a live demonstration.</p>
+    <p>We will walk you through how Fountain can simplify your healthcare data management and streamline patient care.</p>
+    <p>Click the button below to submit a request for a Demo:</p>
+    <a href="https://form.typeform.com/to/cl3qAPKC" target="_blank" class="demo-button">Request Demo</a>
+  </section>
+
+  <footer>
+    <p>developed by Megumin</p>
+    <div class="contact-info">
+      Contact: megumin.wang@mail.fountainhealth.net | +1 438 988 9882
+    </div>
+  </footer>
+</body>
+</html>
